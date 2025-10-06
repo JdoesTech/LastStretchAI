@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini e-Learning</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header class="app-header">
+        <div class="container header-inner">
+            <div class="brand" role="link" tabindex="0" id="nav-home">Mini e-Learning</div>
+            <nav class="nav-actions">
+                <span id="user-greeting" class="muted"></span>
+                <button id="login-btn" class="btn">Login</button>
+                <button id="logout-btn" class="btn btn-outline" style="display:none">Logout</button>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container" id="app-root" aria-live="polite"></main>
+
+    <template id="tpl-home">
+        <section>
+            <h1>Courses</h1>
+            <div id="course-list" class="course-grid"></div>
+        </section>
+    </template>
+
+    <template id="tpl-course">
+        <section>
+            <button class="btn btn-link" id="back-btn">← Back to courses</button>
+            <h1 id="course-title"></h1>
+            <p id="course-desc" class="muted"></p>
+
+            <div class="progress-wrap">
+                <div class="progress-bar" aria-label="Course progress">
+                    <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+                </div>
+                <span id="progress-text" class="muted">0% complete</span>
+            </div>
+
+            <h2>Lessons</h2>
+            <ul id="lesson-list" class="lesson-list"></ul>
+
+            <div class="actions">
+                <button id="complete-course-btn" class="btn">Mark as Completed</button>
+            </div>
+        </section>
+    </template>
+
+    <template id="tpl-auth">
+        <section class="auth-card">
+            <h1>Welcome</h1>
+            <p class="muted">Login or sign up to save your progress locally.</p>
+            <form id="auth-form" class="auth-form">
+                <label>
+                    <span>Email</span>
+                    <input type="email" id="auth-email" required placeholder="you@example.com">
+                </label>
+                <label>
+                    <span>Password</span>
+                    <input type="password" id="auth-password" required placeholder="••••••••">
+                </label>
+                <div class="actions">
+                    <button type="submit" class="btn">Continue</button>
+                    <button type="button" id="cancel-auth" class="btn btn-outline">Cancel</button>
+                </div>
+            </form>
+        </section>
+    </template>
+
+    <script src="app.js"></script>
+</body>
+</html>
+
