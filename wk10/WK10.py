@@ -48,3 +48,30 @@ X=df.drop(columns=["EnergyConsumption"])
 X=pd.get_dummies(X, drop_first=True)
 print(f"X shape: {X.shape}")
 feature_name=X.columns.tolist()
+
+#function to domicile regression
+def report_regression(y_true, y_pred, prefix=''):
+    mae = mean_absolute_error(y_true, y_pred)
+    mse = mean_squared_error(y_true, y_pred)
+    rmse = mse ** 0.5
+    r2 = r2_score(y_true, y_pred)
+    print(f"{prefix} MAE: {mae:.4f}")
+    print(f"{prefix} MSE: {mse:.4f}")
+    print(f"{prefix} RMSE: {rmse:.4f}")
+    print(f"{prefix} R^2: {r2:.4f}")
+    return {'mae': mae, 'mse': mse, 'rmse': rmse, 'r2': r2}
+
+#Split data
+X_train, X_test, X_hold, y_train, y_test, y_hold = two_stage_split(X.values, y_reg.values, holdout_frac=0.2, test_frac_within=0.2, random_state=42)
+
+scaler= StandardScaler()
+X_train_sc= scaler.fit_transform(X_train)
+X_test_sc= scaler.transform(X_test)
+X_hold_sc= scaler.transform(X_hold)
+
+#linear regression
+rgr= LinearRegression()
+rgr.fit(X_train_sc, y_train)
+y_pred= rgr.predict(X_test_sc)
+
+report_regression(y_test, y_pred_test, prefix='Test')
